@@ -26,25 +26,33 @@ public class Pawn extends AbstractPiece {
 
 
         if (this.colour.equals(PlayerColour.WHITE)) {
-            if (board.get(from.plus(-1,0)) == null) {
-                if (from.getRow() == 6) {
-                    moves.add(moveUp1);
-                    moves.add(moveUp2);
-                } else {
-                    moves.add(moveUp1);
-                }
-            } else {return moves;}
 
+            if (from.getRow() != 0) {
+                if (board.get(from.plus(-1, 0)) == null) {
+                    if (from.getRow() == 6) {
+                        moves.add(moveUp1);
+                        moves.add(moveUp2);
+                    } else {
+                        moves.add(moveUp1);
+                    }
+                } else {
+                    return moves;
+                }
+            }
         } else if (this.colour.equals(PlayerColour.BLACK)) {
 
-            if (board.get(from.plus(1, 0)) == null) {
-                if (from.getRow() == 1) {
-                    moves.add(moveDown1);
-                    moves.add(moveDown2);
+            if (from.getRow() != 7) {
+                if (board.get(from.plus(1, 0)) == null) {
+                    if (from.getRow() == 1) {
+                        moves.add(moveDown1);
+                        moves.add(moveDown2);
+                    } else {
+                        moves.add(moveDown1);
+                    }
                 } else {
-                    moves.add(moveDown1);
+                    return moves;
                 }
-            } else {return moves;}
+            }
         }
 
         return moves;
