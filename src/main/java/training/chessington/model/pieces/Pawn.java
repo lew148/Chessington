@@ -23,6 +23,10 @@ public class Pawn extends AbstractPiece {
         Move moveUp2 = new Move(from, from.plus(-2, 0));
         Move moveDown1 = new Move(from, from.plus(1, 0));
         Move moveDown2 = new Move(from, from.plus(2, 0));
+        Move moveDiagonalUpRight = new Move(from, from.plus(-1,1));
+        Move moveDiagonalUpLeft = new Move(from, from.plus(-1, -1));
+        Move moveDiagonalDownRight = new Move(from, from.plus(1, 1));
+        Move moveDiagonalDownLeft = new Move(from, from.plus(1, -1));
 
 
         if (this.colour.equals(PlayerColour.WHITE)) {
@@ -35,10 +39,28 @@ public class Pawn extends AbstractPiece {
                     } else {
                         moves.add(moveUp1);
                     }
-                } else {
-                    return moves;
+                }
+                if (from.getCol() != 0 && from.getCol() != 7) {
+                    if (board.get(from.plus(-1, 1)) != null || board.get(from.plus(-1, -1)) != null) {
+                        if (board.get(from.plus(-1, 1)) != null && board.get(from.plus(-1, 1)).getColour() != PlayerColour.WHITE) {
+                            moves.add(moveDiagonalUpRight);
+                        }
+                        if (board.get(from.plus(-1, -1)) != null && board.get(from.plus(-1, -1)).getColour() != PlayerColour.WHITE) {
+                            moves.add(moveDiagonalUpLeft);
+                        }
+                    }
+                } else if (from.getCol() == 0) {
+                    if (board.get(from.plus(-1, 1)) != null && board.get(from.plus(-1, 1)).getColour() != PlayerColour.WHITE) {
+                        moves.add(moveDiagonalUpRight);
+                    }
+                } else if (from.getCol() == 7) {
+                    if (board.get(from.plus(-1, -1)) != null && board.get(from.plus(-1, -1)).getColour() != PlayerColour.WHITE) {
+                            moves.add(moveDiagonalUpLeft);
+                    }
                 }
             }
+
+
         } else if (this.colour.equals(PlayerColour.BLACK)) {
 
             if (from.getRow() != 7) {
@@ -49,8 +71,24 @@ public class Pawn extends AbstractPiece {
                     } else {
                         moves.add(moveDown1);
                     }
-                } else {
-                    return moves;
+                }
+                if (from.getCol() != 0 && from.getCol() != 7) {
+                    if (board.get(from.plus(1, 1)) != null || board.get(from.plus(1, -1)) != null) {
+                        if (board.get(from.plus(1, 1)) != null && board.get(from.plus(1, 1)).getColour() != PlayerColour.BLACK) {
+                            moves.add(moveDiagonalDownRight);
+                        }
+                        if (board.get(from.plus(1, -1)) != null && board.get(from.plus(1, -1)).getColour() != PlayerColour.BLACK) {
+                            moves.add(moveDiagonalDownLeft);
+                        }
+                    }
+                } else if (from.getCol() == 0) {
+                    if (board.get(from.plus(1, 1)) != null && board.get(from.plus(1, 1)).getColour() != PlayerColour.BLACK) {
+                        moves.add(moveDiagonalDownRight);
+                    }
+                } else if (from.getCol() == 7) {
+                    if (board.get(from.plus(1, -1)) != null && board.get(from.plus(1, -1)).getColour() != PlayerColour.BLACK) {
+                        moves.add(moveDiagonalDownLeft);
+                    }
                 }
             }
         }
