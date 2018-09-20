@@ -19,30 +19,40 @@ public class Pawn extends AbstractPiece {
     @Override
     public List<Move> getAllowedMoves(Coordinates from, Board board) {
         ArrayList<Move> moves = new ArrayList<>();
+        Move moveUp1 = new Move(from, from.plus(-1, 0));
+        Move moveUp2 = new Move(from, from.plus(-2, 0));
+        Move moveDown1 = new Move(from, from.plus(1, 0));
+        Move moveDown2 = new Move(from, from.plus(2, 0));
+
 
         if (this.colour.equals(PlayerColour.WHITE)) {
-
-            if (from.getRow() == 6) {
-                Move moveUp1 = new Move(from, from.plus(-1, 0));
-                Move moveUp2 = new Move(from, from.plus(-2, 0));
-                moves.add(moveUp1);
-                moves.add(moveUp2);
-            } else {
-                Move moveUp1 = new Move(from, from.plus(-1, 0));
-                moves.add(moveUp1);
-            }
+            if (board.get(from.plus(-1,0)) == null) {
+                if (from.getRow() == 6) {
+                    if(board.get(from.plus(-2, 0)) == null) {
+                        moves.add(moveUp1);
+                        moves.add(moveUp2);
+                    } else {
+                        moves.add(moveUp1);
+                    }
+                } else {
+                    moves.add(moveUp1);
+                }
+            } else {return moves;}
 
         } else if (this.colour.equals(PlayerColour.BLACK)) {
 
-            if (from.getRow() == 1) {
-                Move moveDown1 = new Move(from, from.plus(1, 0));
-                Move moveDown2 = new Move(from, from.plus(2, 0));
-                moves.add(moveDown1);
-                moves.add(moveDown2);
-            } else {
-                Move moveDown1 = new Move(from, from.plus(1, 0));
-                moves.add(moveDown1);
-            }
+            if (board.get(from.plus(1, 0)) == null) {
+                if (from.getRow() == 1) {
+                    if (board.get(from.plus(2,0)) == null) {
+                        moves.add(moveDown1);
+                        moves.add(moveDown2);
+                    } else {
+                        moves.add(moveDown1);
+                    }
+                } else {
+                    moves.add(moveDown1);
+                }
+            } else {return moves;}
         }
 
         return moves;
