@@ -21,12 +21,28 @@ public class Pawn extends AbstractPiece {
         ArrayList<Move> moves = new ArrayList<>();
 
         if (this.colour.equals(PlayerColour.WHITE)) {
-            Move moveUp1 = new Move(from, from.plus(-1, 0));
-            moves.add(moveUp1);
-            if
+
+            if (from.getRow() == 6) {
+                Move moveUp1 = new Move(from, from.plus(-1, 0));
+                Move moveUp2 = new Move(from, from.plus(-2, 0));
+                moves.add(moveUp1);
+                moves.add(moveUp2);
+            } else {
+                Move moveUp1 = new Move(from, from.plus(-1, 0));
+                moves.add(moveUp1);
+            }
+
         } else if (this.colour.equals(PlayerColour.BLACK)) {
-            Move moveDown1 = new Move(from, from.plus(1, 0));
-            moves.add(moveDown1);
+
+            if (from.getRow() == 1) {
+                Move moveDown1 = new Move(from, from.plus(1, 0));
+                Move moveDown2 = new Move(from, from.plus(2, 0));
+                moves.add(moveDown1);
+                moves.add(moveDown2);
+            } else {
+                Move moveDown1 = new Move(from, from.plus(1, 0));
+                moves.add(moveDown1);
+            }
         }
 
         return moves;
