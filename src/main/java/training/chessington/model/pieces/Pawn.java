@@ -28,12 +28,8 @@ public class Pawn extends AbstractPiece {
         if (this.colour.equals(PlayerColour.WHITE)) {
             if (board.get(from.plus(-1,0)) == null) {
                 if (from.getRow() == 6) {
-                    if(board.get(from.plus(-2, 0)) == null) {
-                        moves.add(moveUp1);
-                        moves.add(moveUp2);
-                    } else {
-                        moves.add(moveUp1);
-                    }
+                    moves.add(moveUp1);
+                    moves.add(moveUp2);
                 } else {
                     moves.add(moveUp1);
                 }
@@ -43,12 +39,8 @@ public class Pawn extends AbstractPiece {
 
             if (board.get(from.plus(1, 0)) == null) {
                 if (from.getRow() == 1) {
-                    if (board.get(from.plus(2,0)) == null) {
-                        moves.add(moveDown1);
-                        moves.add(moveDown2);
-                    } else {
-                        moves.add(moveDown1);
-                    }
+                    moves.add(moveDown1);
+                    moves.add(moveDown2);
                 } else {
                     moves.add(moveDown1);
                 }
